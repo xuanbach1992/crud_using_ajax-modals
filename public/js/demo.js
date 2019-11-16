@@ -105,7 +105,18 @@ $(document).ready(function () {
                     ageCustomer: newAgeCustomer,
                 },
                 success: function (result) {
-                    console.log(result)
+                    $('customer-'+result.id).remove();
+                    let printTable = "";
+                    printTable += `<tr  class="customer-${result.id}">
+                <th class="text-center index" data-index="${id}" scope="row">${id}</th>
+                <td class="text-center">${result.name }</td>
+                <td class="text-center">${result.age }</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-warning edit" data-id=${result.id} data-toggle="modal"
+                            data-target="#exampleModal">Edit</button>
+                    <button class="btn btn-outline-danger delete" data-id=${result.id}>Delete</button>
+                </td></tr>`;
+                    $('customer-'+id).append(printTable);
                 }
             });
         })
