@@ -11,12 +11,13 @@ $(document).ready(function () {
             success: function (result) {
                 let printTable = "";
                 $.each(result, function (index, value) {
-                    printTable += `<tr  class="customer-${value.id}">
-                <th class="text-center" scope="row">${index + 1}</th>
-                <td class="text-center">${value.name}</td>
-                <td class="text-center">${value.age}</td>
+                    printTable +=  `<tr  class="customer-${value.id}">
+                <th class="text-center index" data-index="${(index !== undefined) ? (index + 1) : 1}" scope="row">${(index !== undefined) ? (index + 1) : 1}</th>
+                <td class="text-center nameCustomer-${value.id}">${(value.name !== null) ? value.name : ""}</td>
+                <td class="text-center ageCustomer-${value.id}">${(value.age !== null) ? value.age : ""}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-primary">Edit</button>
+                    <button class="btn btn-outline-warning edit" data-id=${value.id} data-toggle="modal"
+                            data-target="#exampleModal">Edit</button>
                     <button class="btn btn-outline-danger delete" data-id=${value.id}>Delete</button>
                 </td></tr>`;
                 });
@@ -45,37 +46,42 @@ $(document).ready(function () {
     //End delete
 
     //add
-    $("#add-customer").on('click', function () {
-        if (confirm("Add Customer?")) {
-            let indexNewCustomer = $(".index:last").data('index');
-
-            let name = $('#new-name-customer').val();
-            let age = $('#new-age-customer').val();
-            $.ajax({
-                url: "http://127.0.0.1:8000/customers/create",
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    nameCustomer: name,
-                    ageCustomer: age
-                },
-                success: function (result) {
-                    let printTable = "";
-                    printTable += `<tr  class="customer-${result.id}">
+    $("body").on('click', "#btn-create", function () {
+        $("#add-customer").show();
+        $('#update-customer').hide();
+        $('#new-name-customer').val("");
+        $('#new-age-customer').val("")
+        $("#add-customer").on("click", function () {
+            if (confirm("Add Customer?")) {
+                let indexNewCustomer = $(".index:last").data('index');
+                let name = $('#new-name-customer').val();
+                let age = $('#new-age-customer').val();
+                $.ajax({
+                    url: "http://127.0.0.1:8000/customers/create",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {
+                        nameCustomer: name,
+                        ageCustomer: age
+                    },
+                    success: function (result) {
+                        let printTable = "";
+                        printTable += `<tr  class="customer-${result.id}">
                 <th class="text-center index" data-index="${(indexNewCustomer !== undefined) ? (indexNewCustomer + 1) : 1}" scope="row">${(indexNewCustomer !== undefined) ? (indexNewCustomer + 1) : 1}</th>
-                <td class="text-center">${(result.name !== null) ? result.name() : ""}</td>
-                <td class="text-center">${(result.age !== null) ? result.age() : ""}</td>
+                <td class="text-center nameCustomer-${result.id}">${(result.name !== null) ? result.name : ""}</td>
+                <td class="text-center ageCustomer-${result.id}">${(result.age !== null) ? result.age : ""}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-warning edit" data-id=${result.id} data-toggle="modal"
                             data-target="#exampleModal">Edit</button>
                     <button class="btn btn-outline-danger delete" data-id=${result.id}>Delete</button>
                 </td></tr>`;
-                    $('#list-customers').append(printTable);
-                },
-                errors: function () {
-                },
-            })
-        }
+                        $('#list-customers').append(printTable);
+                    },
+                    errors: function () {
+                    },
+                })
+            }
+        });
     });
 //    End Add
 
@@ -83,6 +89,7 @@ $(document).ready(function () {
     $('body').on("click", ".edit", function () {
         $("#add-customer").hide();
         $('#update-customer').show();
+
         let id = $(this).data('id');
         let name = $(this).parent("td").prev("td").prev("td").text();
         let age = $(this).parent("td").prev("td").text();
@@ -91,9 +98,8 @@ $(document).ready(function () {
         $('#new-age-customer').val(age);
         $("#id-edit-customer").val(id);
 
-        $("#update-customer").on("click",function () {
+        $("#update-customer").on("click", function () {
             let newNameCustomer = $('#new-name-customer').val();
-            console.log(newNameCustomer);
             let newAgeCustomer = $('#new-age-customer').val();
             let id = $("#id-edit-customer").val();
             $.ajax({
@@ -105,18 +111,8 @@ $(document).ready(function () {
                     ageCustomer: newAgeCustomer,
                 },
                 success: function (result) {
-                    $('customer-'+result.id).remove();
-                    let printTable = "";
-                    printTable += `<tr  class="customer-${result.id}">
-                <th class="text-center index" data-index="${id}" scope="row">${id}</th>
-                <td class="text-center">${result.name }</td>
-                <td class="text-center">${result.age }</td>
-                <td class="text-center">
-                    <button class="btn btn-outline-warning edit" data-id=${result.id} data-toggle="modal"
-                            data-target="#exampleModal">Edit</button>
-                    <button class="btn btn-outline-danger delete" data-id=${result.id}>Delete</button>
-                </td></tr>`;
-                    $('customer-'+id).append(printTable);
+                    $('.nameCustomer-' + id).text(result.name);
+                    $('.ageCustomer-' + id).text(result.age);
                 }
             });
         })

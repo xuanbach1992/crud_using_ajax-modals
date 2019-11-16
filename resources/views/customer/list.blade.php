@@ -14,8 +14,8 @@
             <tr class="customer-{{$item->id}}" >
                 <th id="{{$item->id}}" class="text-center index" data-index="{{(!empty($key))?($key+1):1}}"
                     scope="row">{{(!empty($key))?($key+1):1}}</th>
-                <td class="text-center">{{$item->name}}</td>
-                <td class="text-center">{{$item->age}}</td>
+                <td class="text-center nameCustomer-{{$item->id}}">{{$item->name}}</td>
+                <td class="text-center ageCustomer-{{$item->id}}">{{$item->age}}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-warning edit" name="edit" data-id={{$item->id}} data-toggle="modal"
                             data-target="#exampleModal">Edit
