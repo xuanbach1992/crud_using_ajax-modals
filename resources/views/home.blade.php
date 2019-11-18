@@ -89,10 +89,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="id-using-for-edit" style="display:none">
-                        <label for="exampleInputEmail1">Id</label>
-                        <input type="text" class="form-control" id="id-edit-customer" placeholder="Enter Name">
-                    </div>
                     <div>
                         <label for="exampleInputEmail1">name</label>
                         <input type="text" class="form-control" id="new-name-customer" placeholder="Enter Name">
@@ -105,14 +101,44 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary " id="add-customer" data-dismiss="modal">Create
                     </button>
-                    <button type="button" class="btn btn-secondary " id="update-customer" style="display:none"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">edit customers</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="id-using-for-edit" style="display:none">
+                        <label for="exampleInputEmail1">Id</label>
+                        <input type="text" class="form-control" id="id-edit-customer" placeholder="Enter Name">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1">name</label>
+                        <input type="text" class="form-control" id="old-name-customer" placeholder="Enter Name">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1">age</label>
+                        <input type="number" class="form-control" id="old-age-customer" placeholder="Enter Age">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary " id="update-customer"
                             data-dismiss="modal">Update
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <nav class="navbar navbar-expand-lg col-lg-10  navbar-light bg-light">
             <a class="navbar-brand" href="#">Home</a>

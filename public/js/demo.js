@@ -17,7 +17,7 @@ $(document).ready(function () {
                 <td class="text-center ageCustomer-${value.id}">${(value.age !== null) ? value.age : ""}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-warning edit" data-id=${value.id} data-toggle="modal"
-                            data-target="#exampleModal">Edit</button>
+                            data-target="#exampleModalLong">Edit</button>
                     <button class="btn btn-outline-danger delete" data-id=${value.id}>Delete</button>
                 </td></tr>`;
                 });
@@ -46,12 +46,7 @@ $(document).ready(function () {
     //End delete
 
     //add
-    $("body").on('click', "#btn-create", function () {
-        $("#add-customer").show();
-        $('#update-customer').hide();
-        $('#new-name-customer').val("");
-        $('#new-age-customer').val("")
-        $("#add-customer").on("click", function () {
+    $("body").on('click', "#add-customer", function () {
             if (confirm("Add Customer?")) {
                 let indexNewCustomer = $(".index:last").data('index');
                 let name = $('#new-name-customer').val();
@@ -72,7 +67,7 @@ $(document).ready(function () {
                 <td class="text-center ageCustomer-${result.id}">${(result.age !== null) ? result.age : ""}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-warning edit" data-id=${result.id} data-toggle="modal"
-                            data-target="#exampleModal">Edit</button>
+                            data-target="#exampleModalLong">Edit</button>
                     <button class="btn btn-outline-danger delete" data-id=${result.id}>Delete</button>
                 </td></tr>`;
                         $('#list-customers').append(printTable);
@@ -81,26 +76,22 @@ $(document).ready(function () {
                     },
                 })
             }
-        });
     });
 //    End Add
 
 //edit
     $('body').on("click", ".edit", function () {
-        $("#add-customer").hide();
-        $('#update-customer').show();
-
         let id = $(this).data('id');
         let name = $(this).parent("td").prev("td").prev("td").text();
         let age = $(this).parent("td").prev("td").text();
 
-        $('#new-name-customer').val(name);
-        $('#new-age-customer').val(age);
+        $('#old-name-customer').val(name);
+        $('#old-age-customer').val(age);
         $("#id-edit-customer").val(id);
 
         $("#update-customer").on("click", function () {
-            let newNameCustomer = $('#new-name-customer').val();
-            let newAgeCustomer = $('#new-age-customer').val();
+            let newNameCustomer = $('#old-name-customer').val();
+            let newAgeCustomer = $('#old-age-customer').val();
             let id = $("#id-edit-customer").val();
             $.ajax({
                 url: "http://127.0.0.1:8000/customers/" + id + "/edit",
