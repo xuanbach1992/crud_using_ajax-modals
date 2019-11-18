@@ -17,10 +17,10 @@
                 <td class="text-center nameCustomer-{{$item->id}}">{{$item->name}}</td>
                 <td class="text-center ageCustomer-{{$item->id}}">{{$item->age}}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-warning edit" data-id={{$item->id}} data-toggle="modal"
+                    <button class="btn btn-warning edit" data-id={{$item->id}} data-toggle="modal"
                             data-target="#exampleModalLong">Edit
                     </button>
-                    <button class="btn btn-outline-danger delete" data-id={{$item->id}}>Delete</button>
+                    <button class="btn btn-danger delete" data-id={{$item->id}}>Delete</button>
                 </td>
             </tr>
         @endforeach

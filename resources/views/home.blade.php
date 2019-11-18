@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary " id="add-customer" data-dismiss="modal">Create
+                    <button type="button" class="btn btn-primary " id="add-customer" data-dismiss="modal">Create
                     </button>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary " id="update-customer"
+                    <button type="button" class="btn btn-success" id="update-customer"
                             data-dismiss="modal">Update
                     </button>
                 </div>

@@ -16,9 +16,9 @@ $(document).ready(function () {
                 <td class="text-center nameCustomer-${value.id}">${(value.name !== null) ? value.name : ""}</td>
                 <td class="text-center ageCustomer-${value.id}">${(value.age !== null) ? value.age : ""}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-warning edit" data-id=${value.id} data-toggle="modal"
+                    <button class="btn btn-warning edit" data-id=${value.id} data-toggle="modal"
                             data-target="#exampleModalLong">Edit</button>
-                    <button class="btn btn-outline-danger delete" data-id=${value.id}>Delete</button>
+                    <button class="btn btn-danger delete" data-id=${value.id}>Delete</button>
                 </td></tr>`;
                 });
                 $('#list-customers').html(printTable);
@@ -66,9 +66,9 @@ $(document).ready(function () {
                 <td class="text-center nameCustomer-${result.id}">${(result.name !== null) ? result.name : ""}</td>
                 <td class="text-center ageCustomer-${result.id}">${(result.age !== null) ? result.age : ""}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-warning edit" data-id=${result.id} data-toggle="modal"
+                    <button class="btn btn-warning edit" data-id=${result.id} data-toggle="modal"
                             data-target="#exampleModalLong">Edit</button>
-                    <button class="btn btn-outline-danger delete" data-id=${result.id}>Delete</button>
+                    <button class="btn btn-danger delete" data-id=${result.id}>Delete</button>
                 </td></tr>`;
                         $('#list-customers').append(printTable);
                     },
