@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("home");
 Route::prefix("customers")->group(function () {
     Route::get('/', "CustomerController@show")->name('customers.list');
     Route::get("/search", "CustomerController@search")->name("customer.search");
